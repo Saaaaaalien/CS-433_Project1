@@ -49,7 +49,16 @@ def least_squraes(y, tx):
     return w, loss
 
 def ridge_regression(y, tx, lambda_):
-    return
+    # w = (X.T@X + lambda * I)^-1 (X.T @ y)
+    # e = y - X @ w
+    # loss = 1/2 * np.mean(e**2)
+    a = tx.T @ tx + lambda_ * np.eye(tx.shape[1])
+    b = tx.T @ y
+    w = np.linalg.solve(a, b)
+    e = y - tx @ w
+    loss = 1/2 * np.mean(e**2)
+
+    return w, loss
 
 def logistic_regression(y, tx, initial_w, max_iters, gamma):
     return
