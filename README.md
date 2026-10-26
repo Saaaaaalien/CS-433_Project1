@@ -36,4 +36,4 @@ To prepare the raw data for the models, we applied the following pipeline:
    ```bash
    python run.py
    ```
-4. This will generate `submission.csv` in the root directory, which reproduces our best AIcrowd score.
+4. This will generate `submission.csv` in the root directory.
