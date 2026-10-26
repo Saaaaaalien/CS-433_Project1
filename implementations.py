@@ -60,8 +60,32 @@ def ridge_regression(y, tx, lambda_):
 
     return w, loss
 
+def _sigmoid(eta):
+    # sigmoid = 1/(1 + e^-eta) for eta >= 0
+    # sigmoid = e^eta/ (1 + e^eta) for eta < 0
+    sig = np.empty_like(eta, dtype = float)
+
+    pos = eta >= 0
+
+    sig[pos] = 1.0/ (1.0 + np.exp(-eta[pos]))
+    sig[~pos] = np.exp(eta[~pos])/ (1.0 + np.exp(eta[~pos]))
+   
+    return sig
+
 def logistic_regression(y, tx, initial_w, max_iters, gamma):
-    return
+    # gradient = 1/ N * (X.T @ (sigmoid(X @ w) - y))
+    # w = w - gamma * gradient
+    # loss = 1/N * (-y * X @ w + log(1 + e^(X @ w)))
+    w = initial_w.copy()
+    eta = tx @ w
+    for i in range(max_iters):
+        sig = _sigmoid(eta)
+        gradient = (tx.T @ (sig - y))/ len(y)
+        w = w - gamma * gradient
+    loss = np.mean(-y * eta + np.logaddexp(0, eta))
+
+    return w, loss
 
 def reg_logistic_regression(y, tx, lambda_, initial_w, max_iters, gamma):
+
     return
