@@ -36,7 +36,17 @@ def mean_squared_error_sgd(y, tx, initial_w, max_iters, gamma):
     return w, loss
 
 def least_squraes(y, tx):
-    return
+    # w = (x.T@X)^-1 (X.T@y)
+    # e = y - X @ w
+    # loss = 1/2 * np.mean(e^2)
+
+    a = tx.T @ tx
+    b = tx.T @ y
+    w = np.linalg.solve(a, b)
+    e = y - tx @ w
+    loss = 1/2 * np.mean(e**2)
+
+    return w, loss
 
 def ridge_regression(y, tx, lambda_):
     return
