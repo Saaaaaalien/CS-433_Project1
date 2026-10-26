@@ -87,5 +87,15 @@ def logistic_regression(y, tx, initial_w, max_iters, gamma):
     return w, loss
 
 def reg_logistic_regression(y, tx, lambda_, initial_w, max_iters, gamma):
+    # gradient = 1/ N * (X.T @ (sigmoid(X @ w) - y)) + lambda_ * w
+    # w = w - gamma * gradient
+    # loss = 1/N * (-y * X @ w + log(1 + e^(X @ w)))
+    w = initial_w.copy()
+    eta = tx @ w
+    for i in range(max_iters):
+        sig = _sigmoid(eta)
+        gradient = (tx.T @ (sig - y))/ len(y) + lambda_ * w
+        w = w - gamma * gradient
+    loss = np.mean(-y * eta + np.logaddexp(0, eta))
 
-    return
+    return w, loss
