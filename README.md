@@ -17,7 +17,7 @@ To prepare the raw data for the models, we applied the following pipeline:
 2. **Missing Value Imputation**: We found that missing values in the CSV (empty fields) were parsed as `NaN`. We replaced all `NaN` and `Inf` values with `0.0` using `np.nan_to_num`.
 3. **Standardization**: Features were z-score normalized (mean 0, standard deviation 1). This prevents gradient explosion when training on 300+ features.
 4. **Bias Term**: A column of 1s was appended to the feature matrix to serve as the intercept (\(w_0\)).
-5. **Undersampling**: The dataset is highly imbalanced (91.5% negative class, 8.5% positive class). To prevent the model from simply predicting the majority class, we randomly undersampled the negative class in the **training folds** to create a 1:1 balanced training set.
+5. **Undersampling**: The dataset is highly imbalanced (91.45% negative class, 8.55% positive class). To prevent the model from simply predicting the majority class, we randomly undersampled the negative class in the **training folds** to create a 1:1 balanced training set.
 
 ## Cross-Validation Steps
 **5-Fold Cross-Validation** is used:
